@@ -152,4 +152,9 @@ public class ShootSinglePhotoView extends BaseThreeBtnView {
 
     @Override
     protected int getMiddleBtnTextResourceId() {return R.string.shoot_single_photo;}
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

@@ -15,7 +15,7 @@
     <string name="success">Success</string>
 
     <!-- Component list -->
-    <string name="component_listview_component">Component</string>
+    <string name="component_listview_component">Fonctionnalites</string>
     <string name="component_listview_camera">Camera</string>
     <string name="component_listview_gimbal">Gimbal</string>
     <string name="component_listview_flight_controller">Flight Controller</string>

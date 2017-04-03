@@ -2,6 +2,7 @@ package com.dji.sdk.sample.gimbal;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.dji.sdk.sample.R;
 import com.dji.sdk.sample.common.BaseThreeBtnView;
@@ -93,6 +94,11 @@ public class MoveGimbalWithSpeedView extends BaseThreeBtnView {
             mGimbalRotationTimerTask = new GimbalRotateTimerTask(mPitchSpeedRotation,null,null);
             mTimer.schedule(mGimbalRotationTimerTask, 0, 100);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     class GimbalRotateTimerTask extends TimerTask {

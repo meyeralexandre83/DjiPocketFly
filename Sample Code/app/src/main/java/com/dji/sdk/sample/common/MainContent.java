@@ -107,14 +107,6 @@ public class MainContent extends RelativeLayout implements DJIBaseProduct.DJIVer
                 EventBus.getDefault().post(new SetViewWrapper(R.layout.content_component_list, R.string.activity_component_list, getContext()));
             }
         });
-        mBtnBluetooth.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(Utils.isFastDoubleClick()) return;
-                EventBus.getDefault().post(new SetViewWrapper(R.layout.content_bluetooth, R.string.component_listview_bluetooth,getContext()));
-
-            }
-        });
     }
 
     @Override

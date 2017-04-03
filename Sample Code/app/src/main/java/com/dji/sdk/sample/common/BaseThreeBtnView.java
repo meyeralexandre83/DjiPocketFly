@@ -29,17 +29,6 @@ public abstract class BaseThreeBtnView extends RelativeLayout implements View.On
 
     private void initUI(Context context, AttributeSet attrs) {
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Service.LAYOUT_INFLATER_SERVICE);
-
-        View content = layoutInflater.inflate(R.layout.view_three_btn, null, false);
-        addView(content, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
-
-        mTexInfo = (TextView) findViewById(R.id.text_info);
-
-        middleBtn = (Button) findViewById(R.id.btn_middle);
-        leftBtn = (Button) findViewById(R.id.btn_left);
-        rightBtn = (Button) findViewById(R.id.btn_right);
-
         mTexInfo.setText(getString(getInfoResourceId()));
 
         middleBtn.setText(getString(getMiddleBtnTextResourceId()));
@@ -56,22 +45,6 @@ public abstract class BaseThreeBtnView extends RelativeLayout implements View.On
         return getResources().getString(id);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()) {
-            case R.id.btn_middle :
-                getMiddleBtnMethod();
-                break;
-
-            case R.id.btn_left :
-                getLeftBtnMethod();
-                break;
-
-            case R.id.btn_right:
-                getRightBtnMethod();
-                break;
-        }
-    }
 
     protected abstract int getMiddleBtnTextResourceId();
     protected abstract int getLeftBtnTextResourceId();
