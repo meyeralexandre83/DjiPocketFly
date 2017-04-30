@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/airlink_subtitle_wifi_airlink"/>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:component_name="@string/component_airlink"
@@ -20,9 +20,9 @@
         set:sub_Layout="@layout/content_main"
         set:view_name="@string/view_set_get_wifi_airlink_ssid_view"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:component_name="@string/component_airlink"
@@ -30,7 +30,7 @@
         set:sub_Layout="@layout/content_main"
         set:view_name="@string/view_reboot_wifi_airlink_view"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
     <TextView
         style="@style/listview_subtitle"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="@string/airlink_subtitle_lb_airlink"/>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:component_name="@string/component_airlink"
@@ -46,6 +46,6 @@
         set:sub_Layout="@layout/content_main"
         set:view_name="@string/view_set_get_lb_airlink_channel"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
 </LinearLayout>

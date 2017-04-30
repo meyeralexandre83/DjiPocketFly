@@ -38,7 +38,7 @@
         android:layout_below="@id/btn_next"
         style="@style/common_button"/>
 
-    <com.dji.sdk.sample.common.BaseFpvView
+    <com.dji.sdk.djipocketfly.common.BaseFpvView
         style="@style/fpv"
         android:layout_centerHorizontal="true" />
 

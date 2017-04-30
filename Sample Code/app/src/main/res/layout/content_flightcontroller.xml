@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/flight_controller_subtitle_general"/>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:component_name="@string/component_flight_controller"
@@ -20,9 +20,9 @@
         set:sub_Layout="@layout/content_main"
         set:view_name="@string/view_compass_calibration"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:component_name="@string/component_flight_controller"
@@ -30,7 +30,7 @@
         set:sub_Layout="@layout/content_main"
         set:view_name="@string/view_flight_limitation"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
     <TextView
         style="@style/listview_subtitle"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="@string/flight_controller_subtitle_orientation_mode"/>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:component_name="@string/component_flight_controller"
@@ -46,7 +46,7 @@
         set:sub_Layout="@layout/content_main"
         set:view_name="@string/view_orientation_mode"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
     <TextView
         style="@style/listview_subtitle"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:text="@string/flight_controller_subtitle_virtual_stick"/>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:component_name="@string/component_flight_controller"
@@ -62,7 +62,7 @@
         set:sub_Layout="@layout/content_main"
         set:view_name="@string/view_virtual_stick"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:text="@string/flight_controller_subtitle_intelligent_flight_assistant"/>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:component_name="@string/component_flight_controller"
@@ -79,6 +79,6 @@
         set:sub_Layout="@layout/content_main"
         set:view_name="@string/view_intelligent_flight_assistant"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
 </LinearLayout>

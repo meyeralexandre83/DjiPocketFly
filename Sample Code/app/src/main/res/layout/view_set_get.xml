@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#FFFFFF"
     android:clickable="true"
-    tools:context="com.dji.sdk.sample.common.MainActivity"
+    tools:context="com.dji.sdk.djipocketfly.common.MainActivity"
     android:weightSum="1">
 
     <LinearLayout
@@ -104,7 +104,7 @@
         style="@style/common_button" />
     </LinearLayout>
 
-    <com.dji.sdk.sample.common.BaseFpvView
+    <com.dji.sdk.djipocketfly.common.BaseFpvView
         style="@style/fpv"
         android:layout_weight="0.06" />
 

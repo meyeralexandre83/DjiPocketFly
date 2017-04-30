@@ -12,22 +12,22 @@
         android:layout_height="wrap_content"
         android:text="@string/battery_subtitle"/>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:list_item_name="@string/battery_listview_push_info"
         set:sub_Layout="@layout/content_main"
         set:component_name="@string/component_battery"
         set:view_name="@string/view_push_battery_data">
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:list_item_name="@string/battery_listview_set_get_discharge_day"
         set:sub_Layout="@layout/content_main"
         set:component_name="@string/component_battery"
         set:view_name="@string/view_set_get_discharge_day">
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
 </LinearLayout>

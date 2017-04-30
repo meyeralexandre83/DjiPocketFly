@@ -12,7 +12,7 @@
         style="@style/listview_subtitle"
         android:text="@string/gimbal_subtitle_rotate_gimbal"/>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:list_item_name="@string/gimbal_listview_push_info"
@@ -20,9 +20,9 @@
         set:component_name="@string/component_gimbal"
         set:view_name="@string/view_push_gimbal_data"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:list_item_name="@string/gimbal_listview_rotate_gimbal"
@@ -30,9 +30,9 @@
         set:component_name="@string/component_gimbal"
         set:view_name="@string/view_move_gimbal_with_speed"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
-    <com.dji.sdk.sample.common.ListViewItem
+    <com.dji.sdk.djipocketfly.common.ListViewItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         set:list_item_name="@string/gimbal_listview_gimbal_capability"
@@ -40,6 +40,6 @@
         set:component_name="@string/component_gimbal"
         set:view_name="@string/view_get_gimbal_capability"
         >
-    </com.dji.sdk.sample.common.ListViewItem>
+    </com.dji.sdk.djipocketfly.common.ListViewItem>
 
 </LinearLayout>
