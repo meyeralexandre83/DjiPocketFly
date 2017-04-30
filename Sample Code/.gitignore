@@ -41,6 +41,10 @@ proguard/
 # Gradle generated files
 .gradle/
 
+gradle-wrapper.*
+gradlew
+gradlew.bat
+
 # Signing files
 .signing/
 
