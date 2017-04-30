@@ -42,14 +42,10 @@
         tools:replace="android:icon,android:theme"
         android:theme="@style/AppTheme"
         >
-        <!--
-            ADD API_KEY HERE and make sure you
-            are connected to the Internet before
-            the app is launched
-        -->
+
         <meta-data
             android:name="com.dji.sdk.API_KEY"
-            android:value="c58ca124e64c072e4077c37b" />
+            android:value="57fd960f5efdfd0727db0296" />
 
         <service android:name="dji.sdk.sdkmanager.DJIGlobalService" />
 
