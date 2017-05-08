@@ -288,6 +288,7 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
                         showToast("Record video: success");
                     }else {
                         showToast(djiError.getDescription());
+
                     }
                 }
             });

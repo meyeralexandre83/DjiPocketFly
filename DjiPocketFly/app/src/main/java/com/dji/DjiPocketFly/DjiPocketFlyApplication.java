@@ -78,10 +78,11 @@ public class DjiPocketFlyApplication extends Application{
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(), "Validation de l'api Key", Toast.LENGTH_LONG).show();
+
                     }
                 });
 
-                DJISDKManager.getInstance().startConnectionToProduct();
+                DJISDKManager.getInstance().startConnectionToProduct(); // Initialisation de la entre l'application et le drone.
 
             } else {
 
