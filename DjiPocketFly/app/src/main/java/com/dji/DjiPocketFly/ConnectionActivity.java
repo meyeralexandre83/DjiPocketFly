@@ -40,9 +40,9 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
                     , 1);
         }
 
-        setContentView(R.layout.activity_connection);
+        setContentView(R.layout.activity_connection); // LAncement de la première activity qui est la connection
 
-        initUI();
+        initUI(); // Lancement de la fonction pour l'initialisation du bouton fpv
 
         // Register the broadcast receiver for receiving the device connection's changes.
         IntentFilter filter = new IntentFilter();
@@ -82,9 +82,9 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
 
     private void initUI()
     {
-        mBtnOpen = (Button) findViewById(R.id.btn_open);
+        mBtnOpen = (Button) findViewById(R.id.btn_open); // Recuperation du bouton du layout avec l'id
         mBtnOpen.setOnClickListener(this);
-        mBtnOpen.setEnabled(false);
+        mBtnOpen.setEnabled(false); // On met le bouton fpv à false quand on demarre l'activity
     }
 
     protected BroadcastReceiver mReceiver = new BroadcastReceiver() {
