@@ -25,10 +25,9 @@
              android:layout_height="wrap_content"
              android:layout_gravity="center_vertical"
              android:layout_weight="1"
+             android:fontFamily="sans-serif-condensed"
              android:text="@string/Photo"
-             android:textColor="@android:color/black"
-             android:textSize="12sp"
-             tools:targetApi="lollipop" />
+             android:textColorLink="@android:color/darker_gray" />
 
          <ToggleButton
              android:id="@+id/btn_record"
@@ -40,21 +39,20 @@
              android:textColor="@color/colorBlack"
              android:textOff="@string/filmer"
              android:textOn="@string/arreter"
-             android:textSize="12sp"
-             />
+             android:textSize="12sp" />
 
      </LinearLayout>
 
     <TextView
         android:id="@+id/timer"
         android:layout_width="150dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/video_previewer_surface"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="23dp"
+        android:layout_weight="1"
         android:gravity="center"
-        android:textColor="#ffffff"
-        android:layout_alignTop="@+id/video_previewer_surface"
-        android:layout_centerHorizontal="true" />
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

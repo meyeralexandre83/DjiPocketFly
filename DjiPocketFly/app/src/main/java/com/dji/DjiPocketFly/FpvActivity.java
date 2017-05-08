@@ -150,8 +150,6 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
         recordingTime = (TextView) findViewById(R.id.timer);
         mCaptureBtn = (Button) findViewById(R.id.btn_capture);
         mRecordBtn = (ToggleButton) findViewById(R.id.btn_record);
-        mShootPhotoModeBtn = (Button) findViewById(R.id.btn_shoot_photo_mode);
-        mRecordVideoModeBtn = (Button) findViewById(R.id.btn_record_video_mode);
 
         if (null != mVideoSurface) {
             mVideoSurface.setSurfaceTextureListener(this);
@@ -247,38 +245,15 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
                 captureAction();
                 break;
             }
-            case R.id.btn_shoot_photo_mode:{
-                switchCameraMode(SettingsDefinitions.CameraMode.SHOOT_PHOTO);
-                break;
-            }
-            case R.id.btn_record_video_mode:{
-                switchCameraMode(SettingsDefinitions.CameraMode.RECORD_VIDEO);
-                break;
-            }
             default:
                 break;
         }
     }
 
-    private void switchCameraMode(SettingsDefinitions.CameraMode cameraMode){
 
-        Camera camera = DjiPocketFlyApplication.getCameraInstance();
-        if (camera != null) {
-            camera.setMode(cameraMode, new CommonCallbacks.CompletionCallback() {
-                @Override
-                public void onResult(DJIError error) {
 
-                    if (error == null) {
-                        showToast("Switch Camera Mode Succeeded");
-                    } else {
-                        showToast(error.getDescription());
-                    }
-                }
-            });
-            }
-    }
+    // Methode pour prendre une photo
 
-    // Method for taking photo
     private void captureAction(){
 
         final Camera camera = DjiPocketFlyApplication.getCameraInstance();
@@ -310,7 +285,7 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
         }
     }
 
-    // Method for starting recording
+    // Methode pour lancer l'enregistrement video
     private void startRecord(){
 
         final Camera camera = DjiPocketFlyApplication.getCameraInstance();
@@ -325,11 +300,11 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
                         showToast(djiError.getDescription());
                     }
                 }
-            }); // Execute the startRecordVideo API
+            });
         }
     }
 
-    // Method for stopping recording
+    //  Methode pour arreter l'enregistrement video
     private void stopRecord(){
 
         Camera camera = DjiPocketFlyApplication.getCameraInstance();
@@ -345,7 +320,7 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
                         showToast(djiError.getDescription());
                     }
                 }
-            }); // Execute the stopRecordVideo API
+            });
         }
 
     }

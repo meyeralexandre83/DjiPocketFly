@@ -7,5 +7,10 @@
     <string name="product_information">Product Information</string>
     <string name="connection_loose">Status: No Product Connected</string>
     <string name="sdk_version">DJI SDK Version: 4.0.1</string>
+    <string name="arreter">Arreter</string>
+    <string name="filmer">Filmer</string>
+    <string name="start_record">Start Record</string>
+    <string name="stop_record">Stop Record</string>
+    <string name="Photo" >Prendre une photo</string>
 
 </resources>
