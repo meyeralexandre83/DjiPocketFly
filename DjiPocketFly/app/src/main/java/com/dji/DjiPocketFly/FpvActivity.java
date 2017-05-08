@@ -42,7 +42,7 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fpv_activity);
 
         handler = new Handler();
 

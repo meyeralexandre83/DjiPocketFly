@@ -99,7 +99,7 @@ public class DjiPocketFlyApplication extends Application{
             Log.e("TAG", error.toString());
         }
 
-        // Verification du changeement de la connection du drone ou changement du drone
+        // Verification du changement de la connection du drone ou changement du drone
         @Override
         public void onProductChange(BaseProduct oldProduct, BaseProduct newProduct) {
 
