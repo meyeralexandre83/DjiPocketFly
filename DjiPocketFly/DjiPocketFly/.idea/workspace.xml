@@ -81,8 +81,8 @@
       <file leaf-file-name="MapsActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dji/DjiPocketFly/MapsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="271" column="9" selection-start-line="271" selection-start-column="9" selection-end-line="271" selection-end-column="9" />
+            <state relative-caret-position="323">
+              <caret line="288" column="39" selection-start-line="288" selection-start-column="39" selection-end-line="288" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#10656#11015#0" expanded="true" />
@@ -3593,8 +3593,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dji/DjiPocketFly/MapsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="271" column="9" selection-start-line="271" selection-start-column="9" selection-end-line="271" selection-end-column="9" />
+        <state relative-caret-position="323">
+          <caret line="288" column="39" selection-start-line="288" selection-start-column="39" selection-end-line="288" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#10656#11015#0" expanded="true" />
