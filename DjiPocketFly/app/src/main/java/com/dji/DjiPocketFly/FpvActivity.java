@@ -29,9 +29,8 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
     private static final String TAG = FpvActivity.class.getName();
     protected VideoFeeder.VideoDataCallback mReceivedVideoDataCallBack = null;
 
-    // Codec for video live view
+    // Codec pour le fpv
     protected DJICodecManager mCodecManager = null;
-
     protected TextureView mVideoSurface = null;
     private Button mCaptureBtn;
     private ToggleButton mRecordBtn;
@@ -49,7 +48,7 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
 
         initUI();
 
-        // The callback for receiving the raw H264 video data for camera live view
+        // Callback de récupération des données de la video
         mReceivedVideoDataCallBack = new VideoFeeder.VideoDataCallback() {
 
             @Override
@@ -188,7 +187,7 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
     private void uninitPreviewer() {
         Camera camera = DjiPocketFlyApplication.getCameraInstance();
         if (camera != null){
-            // Reset the callback
+            // On reinitialise la callback
             VideoFeeder.getInstance().getVideoFeeds().get(0).setCallback(null);
         }
     }
@@ -241,7 +240,6 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
                 break;
         }
     }
-
 
 
     // Methode pour prendre une photo
