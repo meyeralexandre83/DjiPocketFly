@@ -29,25 +29,25 @@
         android:required="true" />
 
     <!-- SDK requirement permission end -->
-
     <application
         android:name=".DjiPocketFlyApplication"
         android:allowBackup="true"
+        android:background="#FFFFFF"
         android:icon="@mipmap/test"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:background="#FFFFFF">
+        android:theme="@style/AppTheme">
 
         <!-- On insère l'api key générer par djideveloper avec le nom de package en paramètre -->
         <uses-library android:name="com.android.future.usb.accessory" />
+
         <meta-data
             android:name="com.dji.sdk.API_KEY"
             android:value="5ba54d7145f00e7568dadbfc" />
 
         <activity
             android:name="dji.sdk.sdkmanager.DJIAoaControllerActivity"
-            android:theme="@android:style/Theme.Translucent" >
+            android:theme="@android:style/Theme.Translucent">
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
             </intent-filter>
@@ -56,20 +56,38 @@
                 android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
                 android:resource="@xml/accessory_filter" />
         </activity>
-        <service android:name="dji.sdk.sdkmanager.DJIGlobalService" >
-        </service>
+
+        <service android:name="dji.sdk.sdkmanager.DJIGlobalService"></service>
         <!-- DJI SDK -->
 
-        <activity android:name=".ConnectionActivity"
+        <activity
+            android:name=".ConnectionActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" /> <!-- On lance l'activity principal main -->
             </intent-filter>
         </activity>
         <activity android:name=".FpvActivity"
             android:screenOrientation="landscape">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps">
+>>>>>>> refs/remotes/origin/Finish:DjiPocketFly/DjiPocketFly/app/src/main/AndroidManifest.xml
         </activity>
     </application>
 

@@ -7,6 +7,18 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/btn_maps"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/round_btn"
+        android:text="Afficher la carte"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp" />
+
+    <Button
         android:id="@+id/btn_open"
         android:layout_width="150dp"
         android:layout_height="55dp"
@@ -14,9 +26,9 @@
         android:text="Afficher FPV"
         android:textColor="@color/colorWhite"
         android:textSize="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="77dp" />
+        android:layout_marginBottom="25dp"
+        android:layout_above="@+id/btn_maps"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/imageView4"

@@ -21,6 +21,7 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
 
 
     private Button mBtnOpen;
+    private Button mBtnMaps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,12 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
         mBtnOpen = (Button) findViewById(R.id.btn_open); // Recuperation du bouton du layout avec l'id
         mBtnOpen.setOnClickListener(this);
         mBtnOpen.setEnabled(false); // On met le bouton fpv à false quand on demarre l'activity
+
+        mBtnOpen.setEnabled(false);
+
+        mBtnMaps = (Button) findViewById(R.id.btn_maps);
+        mBtnMaps.setOnClickListener(this);
+
     }
 
     protected BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -106,6 +113,7 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
         else {
             Log.v(TAG, "refreshSDK: False");
             mBtnOpen.setEnabled(false);
+
         }
     }
 
@@ -115,6 +123,15 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
 
             case R.id.btn_open: {
                 Intent intent = new Intent(this, FpvActivity.class); // Au bouton du click on lance l'activity fpv
+
+                Log.i("on click : ", "btn open");
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_maps:{
+                Log.i("on click : ", "btn maps");
+                Intent intent = new Intent(this, MapsActivity.class);
                 startActivity(intent);
                 break;
             }

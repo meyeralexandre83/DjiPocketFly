@@ -1,0 +1,8 @@
+.idea
+*.iml
+Sample Code/DJISDKLIB/build
+Sample Code/app/build
+Sample Code/build
+DjiPocketFly/DjiPocketFly/.idea
+DjiPocketFly/DjiPocketFly/.idea/workspace.xml
+DjiPocketFly/.idea/encodings.xml
