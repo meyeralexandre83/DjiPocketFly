@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
-
 import dji.common.error.DJIError;
 import dji.common.error.DJISDKError;
 import dji.sdk.base.BaseComponent;
@@ -64,10 +63,7 @@ public class DjiPocketFlyApplication extends Application{
         DJISDKManager.getInstance().registerApp(this, mDJISDKManagerCallback);
     }
 
-    /**
-     * When starting SDK services, an instance of interface DJISDKManager.DJISDKManagerCallback will be used to listen to 
-     * the SDK Registration result and the product changing.
-     */
+
     private DJISDKManager.SDKManagerCallback mDJISDKManagerCallback = new DJISDKManager.SDKManagerCallback() {
 
         //Listens to the SDK registration result

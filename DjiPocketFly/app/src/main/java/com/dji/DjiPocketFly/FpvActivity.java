@@ -33,7 +33,7 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
     protected DJICodecManager mCodecManager = null;
 
     protected TextureView mVideoSurface = null;
-    private Button mCaptureBtn, mShootPhotoModeBtn, mRecordVideoModeBtn;
+    private Button mCaptureBtn;
     private ToggleButton mRecordBtn;
     private TextView recordingTime;
 
@@ -83,9 +83,6 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
 
                                 recordingTime.setText(timeString);
 
-                                /*
-                                 * Update recordingTime TextView visibility and mRecordBtn's check state
-                                 */
                                 if (isVideoRecording){
                                     recordingTime.setVisibility(View.VISIBLE);
                                 }else
@@ -108,7 +105,6 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
 
     @Override
     public void onResume() {
-        Log.e(TAG, "onResume");
         super.onResume();
         initPreviewer();
         onProductChange();
@@ -120,33 +116,30 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
 
     @Override
     public void onPause() {
-        Log.e(TAG, "onPause");
         uninitPreviewer();
         super.onPause();
     }
 
     @Override
     public void onStop() {
-        Log.e(TAG, "onStop");
         super.onStop();
     }
 
     public void onReturn(View view){
-        Log.e(TAG, "onReturn");
         this.finish();
     }
 
     @Override
     protected void onDestroy() {
-        Log.e(TAG, "onDestroy");
         uninitPreviewer();
         super.onDestroy();
     }
 
     private void initUI() {
-        // init mVideoSurface
-        mVideoSurface = (TextureView)findViewById(R.id.video_previewer_surface);
 
+        // On initialise le fpv
+
+        mVideoSurface = (TextureView)findViewById(R.id.video_previewer_surface);
         recordingTime = (TextView) findViewById(R.id.timer);
         mCaptureBtn = (Button) findViewById(R.id.btn_capture);
         mRecordBtn = (ToggleButton) findViewById(R.id.btn_record);
@@ -157,8 +150,7 @@ public class FpvActivity extends Activity implements SurfaceTextureListener,OnCl
 
         mCaptureBtn.setOnClickListener(this);
         mRecordBtn.setOnClickListener(this);
-        mShootPhotoModeBtn.setOnClickListener(this);
-        mRecordVideoModeBtn.setOnClickListener(this);
+
 
         recordingTime.setVisibility(View.INVISIBLE);
 

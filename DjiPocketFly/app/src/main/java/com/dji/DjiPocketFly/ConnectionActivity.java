@@ -40,7 +40,7 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
                     , 1);
         }
 
-        setContentView(R.layout.activity_connection); // LAncement de la première activity qui est la connection
+        setContentView(R.layout.activity_connection); // Lancement de la première activity qui est la connection
 
         initUI(); // Lancement de la fonction pour l'initialisation du bouton fpv
 
