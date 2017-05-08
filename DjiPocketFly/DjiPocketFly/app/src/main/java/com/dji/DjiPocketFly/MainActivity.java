@@ -3,6 +3,7 @@ package com.dji.DjiPocketFly;
 import android.app.Activity;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -15,6 +16,16 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import dji.common.camera.SettingsDefinitions;
 import dji.common.camera.SystemState;
 import dji.common.error.DJIError;
@@ -32,8 +43,12 @@ import dji.sdk.products.Aircraft;
 
 public class MainActivity extends Activity implements SurfaceTextureListener,OnClickListener{
 
+    private String FILE_NAME = "locations.txt";
+    protected File mFile;
+
     private static final String TAG = MainActivity.class.getName();
     protected VideoFeeder.VideoDataCallback mReceivedVideoDataCallBack = null;
+
 
     // Codec for video live view
     protected DJICodecManager mCodecManager = null;
@@ -56,6 +71,8 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
         handler = new Handler();
 
         initUI();
+        
+        initFile();
 
         // The callback for receiving the raw H264 video data for camera live view
         mReceivedVideoDataCallBack = new VideoFeeder.VideoDataCallback() {
@@ -125,21 +142,71 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
                 mflightController.setStateCallback(new FlightControllerState.Callback() {
                     @Override
                     public void onUpdate(@NonNull FlightControllerState flightControllerState) {
-                        Log.i("flightController : ", "on update");
-                        mLocation = flightControllerState.getAircraftLocation();
-                        if(mLocation != null){
-                            Log.i("flightController : ", "get location");
-                            Double latitude = flightControllerState.getHomeLocation().getLatitude();
-                            Double longitude = flightControllerState.getHomeLocation().getLongitude();
-                            Log.i("---------------", "------------------------------------------------");
-                            Log.i("Latitude : ", String.valueOf(latitude));
-                            Log.i("Logigtude : ", String.valueOf(longitude));
+                    Log.i("flightController : ", "on update");
+                    mLocation = flightControllerState.getAircraftLocation();
+                    if(mLocation != null){
+                        Log.i("flightController : ", "get location");
+                        Double latitude = flightControllerState.getHomeLocation().getLatitude();
+                        Double longitude = flightControllerState.getHomeLocation().getLongitude();
+                        Log.i("---------------", "------------------------------------------------");
+                        Log.i("Latitude : ", String.valueOf(latitude));
+                        Log.i("Logigtude : ", String.valueOf(longitude));
+                        try {
+                            registerLocation(latitude,longitude);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
+                    }
                     }
                 });
             }
         }
 
+    }
+
+    private void initFile() {
+        // On crée un fichier qui correspond à l'emplacement extérieur
+         mFile = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/ " + getPackageName() + "/files/" + FILE_NAME);
+
+
+    }
+
+    private void registerLocation(Double latitude, Double longitude) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        if(latitude==null || longitude==null){
+            latitude = 43.04;
+            longitude = 7.01;
+        }
+        jsonObject.put("latitude",latitude);
+        jsonObject.put("longitude",longitude);
+
+        String chaine = jsonObject.toString();
+        //WRITE
+        try {
+            // Flux interne
+            FileOutputStream output = openFileOutput(FILE_NAME, MODE_PRIVATE);
+
+            // On écrit dans le flux interne
+            output.write(chaine.getBytes());
+
+            if(output != null)
+                output.close();
+
+            // Si le fichier est lisible et qu'on peut écrire dedans
+            if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                    && !Environment.MEDIA_MOUNTED_READ_ONLY.equals(Environment.getExternalStorageState())) {
+                // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
+                mFile.createNewFile();
+                output = new FileOutputStream(mFile);
+                output.write(chaine.getBytes());
+                if(output != null)
+                    output.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void onProductChange() {

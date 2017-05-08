@@ -109,8 +109,6 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
             Log.v(TAG, "refreshSDK: True");
             mBtnOpen.setEnabled(true);
 
-
-
         } else {
             Log.v(TAG, "refreshSDK: False");
             mBtnOpen.setEnabled(false);
