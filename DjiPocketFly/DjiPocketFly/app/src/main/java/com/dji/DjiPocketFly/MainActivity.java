@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
@@ -17,12 +18,17 @@ import android.widget.ToggleButton;
 import dji.common.camera.SettingsDefinitions;
 import dji.common.camera.SystemState;
 import dji.common.error.DJIError;
+import dji.common.flightcontroller.FlightControllerState;
+import dji.common.flightcontroller.FlightMode;
+import dji.common.flightcontroller.LocationCoordinate3D;
 import dji.common.product.Model;
 import dji.common.util.CommonCallbacks;
 import dji.sdk.base.BaseProduct;
 import dji.sdk.camera.Camera;
 import dji.sdk.camera.VideoFeeder;
 import dji.sdk.codec.DJICodecManager;
+import dji.sdk.flightcontroller.FlightController;
+import dji.sdk.products.Aircraft;
 
 public class MainActivity extends Activity implements SurfaceTextureListener,OnClickListener{
 
@@ -31,6 +37,8 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
 
     // Codec for video live view
     protected DJICodecManager mCodecManager = null;
+    protected FlightController mflightController;
+    protected LocationCoordinate3D mLocation;
 
     protected TextureView mVideoSurface = null;
     private Button mCaptureBtn, mShootPhotoModeBtn, mRecordVideoModeBtn;
@@ -98,6 +106,38 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
                 }
             });
 
+        }
+
+        BaseProduct product = DjiPocketFlyApplication.getProductInstance();
+
+        Log.i("flightController ", "initialize");
+        if(product instanceof Aircraft){
+            if (product instanceof Aircraft) {
+                mflightController = ((Aircraft) product).getFlightController();
+                Log.i("flightController : ", "created");
+            }
+
+            if (mflightController != null) {
+                Log.i("flightController : ", "on update");
+                FlightControllerState flightControllerState = mflightController.getState();
+
+                Log.i("flightController : ", "setStateCallback");
+                mflightController.setStateCallback(new FlightControllerState.Callback() {
+                    @Override
+                    public void onUpdate(@NonNull FlightControllerState flightControllerState) {
+                        Log.i("flightController : ", "on update");
+                        mLocation = flightControllerState.getAircraftLocation();
+                        if(mLocation != null){
+                            Log.i("flightController : ", "get location");
+                            Double latitude = flightControllerState.getHomeLocation().getLatitude();
+                            Double longitude = flightControllerState.getHomeLocation().getLongitude();
+                            Log.i("---------------", "------------------------------------------------");
+                            Log.i("Latitude : ", String.valueOf(latitude));
+                            Log.i("Logigtude : ", String.valueOf(longitude));
+                        }
+                    }
+                });
+            }
         }
 
     }

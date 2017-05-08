@@ -21,6 +21,7 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
 
 
     private Button mBtnOpen;
+    private Button mBtnMaps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,9 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
         mBtnOpen.setOnClickListener(this);
         mBtnOpen.setEnabled(false);
 
+        mBtnMaps = (Button) findViewById(R.id.btn_maps);
+        mBtnMaps.setOnClickListener(this);
+
     }
 
     protected BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -107,11 +111,9 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
 
 
 
-
         } else {
             Log.v(TAG, "refreshSDK: False");
             mBtnOpen.setEnabled(false);
-
 
         }
     }
@@ -121,7 +123,14 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
         switch (v.getId()) {
 
             case R.id.btn_open: {
+                Log.i("on click : ", "btn open");
                 Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_maps:{
+                Log.i("on click : ", "btn maps");
+                Intent intent = new Intent(this, MapsActivity.class);
                 startActivity(intent);
                 break;
             }

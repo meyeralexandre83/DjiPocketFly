@@ -1,33 +1,35 @@
 package com.dji.DjiPocketFly;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.widget.Toast;
 
 import dji.common.error.DJIError;
 import dji.common.error.DJISDKError;
+import dji.common.flightcontroller.LocationCoordinate3D;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
 import dji.sdk.camera.Camera;
+import dji.sdk.flightcontroller.FlightController;
 import dji.sdk.products.Aircraft;
 import dji.sdk.products.HandHeld;
 import dji.sdk.sdkmanager.DJISDKManager;
 
 public class DjiPocketFlyApplication extends Application{
 
-    public static final String FLAG_CONNECTION_CHANGE = "fpv_tutorial_connection_change";
+    private static final String TAG = DjiPocketFlyApplication.class.getName();
+
+    public static final String FLAG_CONNECTION_CHANGE = "dji_sdk_connection_change";
 
     private static BaseProduct mProduct;
 
-    public Handler mHandler;
+    private Handler mHandler;
 
-    /**
-     * This function is used to get the instance of DJIBaseProduct.
-     * If no product is connected, it returns null.
-     */
     public static synchronized BaseProduct getProductInstance() {
         if (null == mProduct) {
             mProduct = DJISDKManager.getInstance().getProduct();
@@ -35,76 +37,54 @@ public class DjiPocketFlyApplication extends Application{
         return mProduct;
     }
 
-    public static boolean isAircraftConnected() {
-        return getProductInstance() != null && getProductInstance() instanceof Aircraft;
-    }
-
-    public static boolean isHandHeldConnected() {
-        return getProductInstance() != null && getProductInstance() instanceof HandHeld;
-    }
-
-    public static synchronized Camera getCameraInstance() {
-
-        if (getProductInstance() == null) return null;
-
-        Camera camera = null;
-
-        if (getProductInstance() instanceof Aircraft){
-            camera = ((Aircraft) getProductInstance()).getCamera();
-
-        } else if (getProductInstance() instanceof HandHeld) {
-            camera = ((HandHeld) getProductInstance()).getCamera();
-        }
-
-        return camera;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
+
         mHandler = new Handler(Looper.getMainLooper());
-        //This is used to start SDK services and initiate SDK.
         DJISDKManager.getInstance().registerApp(this, mDJISDKManagerCallback);
+
     }
 
-    /**
-     * When starting SDK services, an instance of interface DJISDKManager.DJISDKManagerCallback will be used to listen to 
-     * the SDK Registration result and the product changing.
-     */
+    protected void attachBaseContext(Context base){
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
     private DJISDKManager.SDKManagerCallback mDJISDKManagerCallback = new DJISDKManager.SDKManagerCallback() {
 
-        //Listens to the SDK registration result
         @Override
         public void onRegister(DJIError error) {
 
+            Log.d(TAG, error == null ? "Success" : error.getDescription());
             if(error == DJISDKError.REGISTRATION_SUCCESS) {
-
+                DJISDKManager.getInstance().startConnectionToProduct();
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
+
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_LONG).show();
                     }
                 });
-
-                DJISDKManager.getInstance().startConnectionToProduct();
+                Log.d(TAG, "Register success");
 
             } else {
-
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
 
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "Register sdk fails, check network is available", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "register sdk fails, check network is available", Toast.LENGTH_LONG).show();
                     }
                 });
 
+                Log.d(TAG, "Register failed");
+
             }
-            Log.e("TAG", error.toString());
+            Log.e(TAG, error == null ? "success" : error.getDescription());
         }
 
-        //Listens to the connected product changing, including two parts, component changing or product connection changing.
         @Override
         public void onProductChange(BaseProduct oldProduct, BaseProduct newProduct) {
 
@@ -121,7 +101,6 @@ public class DjiPocketFlyApplication extends Application{
 
         @Override
         public void onComponentChange(BaseProduct.ComponentKey key, BaseComponent oldComponent, BaseComponent newComponent) {
-
             if(newComponent != null) {
                 newComponent.setComponentListener(mDJIComponentListener);
             }
@@ -130,11 +109,26 @@ public class DjiPocketFlyApplication extends Application{
 
         @Override
         public void onConnectivityChange(boolean isConnected) {
-
             notifyStatusChange();
         }
 
     };
+
+    public static synchronized Camera getCameraInstance() {
+
+        if (getProductInstance() == null) return null;
+
+        Camera camera = null;
+
+        if (getProductInstance() instanceof Aircraft){
+            camera = ((Aircraft) getProductInstance()).getCamera();
+
+        } else if (getProductInstance() instanceof HandHeld) {
+            camera = ((HandHeld) getProductInstance()).getCamera();
+        }
+
+        return camera;
+    }
 
     private BaseComponent.ComponentListener mDJIComponentListener = new BaseComponent.ComponentListener() {
 
