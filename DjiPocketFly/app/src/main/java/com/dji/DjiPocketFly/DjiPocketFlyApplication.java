@@ -59,7 +59,8 @@ public class DjiPocketFlyApplication extends Application{
     public void onCreate() {
         super.onCreate();
         mHandler = new Handler(Looper.getMainLooper());
-        //This is used to start SDK services and initiate SDK.
+
+        // On initialise le sdk pour l'utilisation des services
         DJISDKManager.getInstance().registerApp(this, mDJISDKManagerCallback);
     }
 
@@ -97,7 +98,7 @@ public class DjiPocketFlyApplication extends Application{
             Log.e("TAG", error.toString());
         }
 
-        //Listens to the connected product changing, including two parts, component changing or product connection changing.
+        // Verification du changeement de la connection du drone ou changement du drone
         @Override
         public void onProductChange(BaseProduct oldProduct, BaseProduct newProduct) {
 
@@ -105,7 +106,7 @@ public class DjiPocketFlyApplication extends Application{
             if(mProduct != null) {
                 mProduct.setBaseProductListener(mDJIBaseProductListener);
             }
-            notifyStatusChange();
+            notifyStatusChange(); // On notifie le changement en appelant la fonction
         }
     };
 
@@ -117,13 +118,13 @@ public class DjiPocketFlyApplication extends Application{
             if(newComponent != null) {
                 newComponent.setComponentListener(mDJIComponentListener);
             }
-            notifyStatusChange();
+            notifyStatusChange(); // On notifie le changement en appelant la fonction
         }
 
         @Override
         public void onConnectivityChange(boolean isConnected) {
 
-            notifyStatusChange();
+            notifyStatusChange();// On notifie le changement en appelant la fonction
         }
 
     };
