@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dji.DjiPocketFly">
 
-    <!-- DJI SDK need permission -->
+    <!-- On ajoute les permissions pour acceder au fonctionnalités du téléphone-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -39,7 +39,7 @@
         android:theme="@style/AppTheme"
         android:background="#FFFFFF">
 
-        <!-- DJI SDK -->
+        <!-- On insère l'api key générer par djideveloper avec le nom de package en paramètre -->
         <uses-library android:name="com.android.future.usb.accessory" />
         <meta-data
             android:name="com.dji.sdk.API_KEY"
@@ -65,10 +65,10 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" /> // On lance l'activity principal main
+                <category android:name="android.intent.category.LAUNCHER" /> <!-- On lance l'activity principal main -->
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name=".FpvActivity"
             android:screenOrientation="landscape">
         </activity>
     </application>
