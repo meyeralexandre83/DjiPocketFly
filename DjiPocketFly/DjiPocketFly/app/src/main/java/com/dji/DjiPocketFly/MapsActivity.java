@@ -133,6 +133,8 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
 //        LatLng(43.7,7.05)
         JSONArray locations = new JSONArray(mFileContent);
 
+        Log.e(TAG,"Locations : "+locations.toString());
+
         PolygonOptions rectOptions = new PolygonOptions();
         for(int i=0;i<locations.length();i++){
             JSONObject location = locations.getJSONObject(i);
@@ -146,36 +148,52 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         mMap.moveCamera(cu);
     }
 
-    public JSONArray createFile(){
+    public JSONArray initTrace(){
         JSONArray content = new JSONArray();
         JSONObject json = new JSONObject();
         try {
-            json.put("latitude",43.07);
-            json.put("longitude",7.05);
+            json.put("latitude",43.616691);
+            json.put("longitude",7.072075);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         content.put(json);
         json = new JSONObject();
         try {
-            json.put("latitude",43.06);
-            json.put("longitude",7.05);
+            json.put("latitude",43.616619);
+            json.put("longitude",7.072334);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         content.put(json);
         json = new JSONObject();
         try {
-            json.put("latitude",43.06);
-            json.put("longitude",7.04);
+            json.put("latitude",43.616549);
+            json.put("longitude", 7.072463);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         content.put(json);
         json = new JSONObject();
         try {
-            json.put("latitude",43.07);
-            json.put("longitude",7.04);
+            json.put("latitude",43.616440);
+            json.put("longitude", 7.072592);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        content.put(json);
+        json = new JSONObject();
+        try {
+            json.put("latitude",43.616487);
+            json.put("longitude", 7.072345);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        content.put(json);
+        json = new JSONObject();
+        try {
+            json.put("latitude",43.616627);
+            json.put("longitude", 7.072088);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -183,13 +201,9 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         return content;
     }
 
-    public void readFile(){
-        Log.e(TAG,"read File");
-
-        mFile = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/ " + getPackageName() + "/files/" + FILE_NAME);
-
+    public void createFile(){
         if(!mFile.exists()){
-            String chaine = createFile().toString();
+            String chaine = initTrace().toString();
             Log.e(TAG,"content : "+chaine);
 
             try {
@@ -220,10 +234,17 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                 e.printStackTrace();
             }
         }
+    }
+
+    public void readFile(){
+        Log.e(TAG,"read File");
+
+//        mFile = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/ " + getPackageName() + "/files/" + FILE_NAME);
 
         //READ
         try {
             FileInputStream input = openFileInput(FILE_NAME);
+
             int value;
             // On utilise un StringBuffer pour construire la chaîne au fur et à mesure
             StringBuffer lu = new StringBuffer();
@@ -232,7 +253,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                 // On écrit dans le fichier le caractère lu
                 lu.append((char)value);
             }
-            Toast.makeText(MapsActivity.this, "Interne : " + lu.toString(), Toast.LENGTH_SHORT).show();
+            Log.e(TAG,"TRACE : "+lu.toString());
             if(input != null)
                 input.close();
 
@@ -292,7 +313,7 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
         //Create MarkerOptions object
         final MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(pos);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_drone2));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.aircraft));
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -326,7 +347,6 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
                 break;
             }
             case R.id.btn_show : {
-                readFile();
                 try {
                     showTrace();
                 } catch (JSONException e) {

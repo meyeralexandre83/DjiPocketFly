@@ -5,6 +5,7 @@ import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.TextureView;
@@ -23,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,7 +46,7 @@ import dji.sdk.products.Aircraft;
 public class MainActivity extends Activity implements SurfaceTextureListener,OnClickListener{
 
     private String FILE_NAME = "locations.txt";
-    protected File mFile;
+    private JSONArray locationsList;
 
     private static final String TAG = MainActivity.class.getName();
     protected VideoFeeder.VideoDataCallback mReceivedVideoDataCallBack = null;
@@ -71,8 +73,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
         handler = new Handler();
 
         initUI();
-        
-        initFile();
+        locationsList = new JSONArray();
 
         // The callback for receiving the raw H264 video data for camera live view
         mReceivedVideoDataCallBack = new VideoFeeder.VideoDataCallback() {
@@ -151,10 +152,18 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
                         Log.i("---------------", "------------------------------------------------");
                         Log.i("Latitude : ", String.valueOf(latitude));
                         Log.i("Logigtude : ", String.valueOf(longitude));
-                        try {
-                            registerLocation(latitude,longitude);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+                        Log.i("Latitude : ", String.valueOf(latitude));
+                        Log.i("Logigtude : ", String.valueOf(longitude));
+                        if(checkGpsCoordinates(latitude,longitude)){
+                            JSONObject jsonObject = new JSONObject();
+                            try {
+                                jsonObject.put("latitude",latitude);
+                                jsonObject.put("longitude",longitude);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            locationsList.put(jsonObject);
                         }
                     }
                     }
@@ -164,28 +173,20 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
 
     }
 
-    private void initFile() {
-        // On crée un fichier qui correspond à l'emplacement extérieur
-         mFile = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/ " + getPackageName() + "/files/" + FILE_NAME);
-
-
+    public static boolean checkGpsCoordinates(double latitude, double longitude) {
+        return (latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180) && (latitude != 0f && longitude != 0f);
     }
 
-    private void registerLocation(Double latitude, Double longitude) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        if(latitude==null || longitude==null){
-            latitude = 43.04;
-            longitude = 7.01;
-        }
-        jsonObject.put("latitude",latitude);
-        jsonObject.put("longitude",longitude);
+    private void registerLocation() throws JSONException {
 
-        String chaine = jsonObject.toString();
+        String chaine = locationsList.toString();
+
         //WRITE
         try {
             // Flux interne
             FileOutputStream output = openFileOutput(FILE_NAME, MODE_PRIVATE);
 
+            Toast.makeText(MainActivity.this, "Regsiter locations", Toast.LENGTH_SHORT).show();
             // On écrit dans le flux interne
             output.write(chaine.getBytes());
 
@@ -193,15 +194,15 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
                 output.close();
 
             // Si le fichier est lisible et qu'on peut écrire dedans
-            if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && !Environment.MEDIA_MOUNTED_READ_ONLY.equals(Environment.getExternalStorageState())) {
-                // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
-                mFile.createNewFile();
-                output = new FileOutputStream(mFile);
-                output.write(chaine.getBytes());
-                if(output != null)
-                    output.close();
-            }
+//            if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+//                    && !Environment.MEDIA_MOUNTED_READ_ONLY.equals(Environment.getExternalStorageState())) {
+//                // On crée un nouveau fichier. Si le fichier existe déjà, il ne sera pas créé
+//                mFile.createNewFile();
+//                output = new FileOutputStream(mFile);
+//                output.write(chaine.getBytes());
+//                if(output != null)
+//                    output.close();
+//            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -229,6 +230,11 @@ public class MainActivity extends Activity implements SurfaceTextureListener,OnC
     public void onPause() {
         Log.e(TAG, "onPause");
         uninitPreviewer();
+        try {
+            registerLocation();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         super.onPause();
     }
 
